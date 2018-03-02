@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<title> Minesweeper Game</title>
+
+    <!-- References -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.9/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.9/addons/p5.dom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.9/addons/p5.sound.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="main.js"></script>
+    <script src="tile.js"></script>
+
+  </head>
+  <body>
+<div id="container">
+
+   <!-- Header -->
+  <div class = "header">
+  <div class = "title">
+  <p> Minesweeper</p>
+  <div class = "dropdown">
+    <button class="dropbtn">Difficulty</button>
+    <div class ="dropdown-content">
+    <a href = "E:\Minesweeper FEB\Beginner\index.html">Beginner</a>
+    <a href = "E:\Minesweeper FEB\Intermediate\index.html">Intermediate</a>
+    <a href = "E:\Minesweeper FEB\Expert\index.html">Expert</a>
+    </div>
+  </div>
+  <hr>
+
+  <!--Scoreboard-->
+ 	<div id = "scoreboard">
+  	<div class = "timer">
+    	<span id = "timer">Time : 00:00</span>
+		<script src = "timer.js"></script>  <!-- Referencing is here since the timer doesn't load correctly when placed in the the <head> -->
+  	</div>
+
+  		<span id = "score"> Score : </span>
+  	</div>
+
+    <!-- How to play / restart -->
+  		 <div id = "homeNav">
+ 	  	<a href = "index2.html">How to Play</a>
+ 	 	<span class ="navSpace"/>
+ 	 	<a href = "">Restart</a>
+  </div>
+
+   <!-- Footer -->
+	<div class='footer'>
+		<div class='footerContent'>
+			<span class = "text">  Stephen Graham | 2017/2018</span>			
+		</div>
+	</div>
+</div>
+</body>
+</html>
