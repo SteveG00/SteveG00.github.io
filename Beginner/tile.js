@@ -60,7 +60,7 @@ Tile.prototype.show = function() {
       if (this.noNeighbours > 0) {
         textAlign(CENTER);
         fill(0);
-        text(this.noNeighbours, this.x + this.tileLength * 0.5, this.y + this.tileLength - 10); // Fills the tile with the number of surrounding mines
+        text(this.noNeighbours, this.x + this.tileLength * 0.5, this.y + this.tileLength - 20); // Fills the tile with the number of surrounding mines
       }
       }
      }
