@@ -17,7 +17,7 @@ function draw() {               //Runs continiously
    background(51, 102, 204);    //draws and updates the canvas (board)
   for (var i = 0; i < cols; i++) {  
     for (var j = 0; j < rows; j++) {
-      grid[i][j].show(); 
+      grid[i][j].show();       // fills the board
      }
   }
 }
