@@ -35,7 +35,7 @@ Tile.prototype.reveal = function() {
    }
 }
 
-Tile.prototype.mousePoint = function(x, y) {
+Tile.prototype.contains = function(x, y) {
   return (x > this.x && x < this.x + this.tileLength && y > this.y && y < this.y + this.tileLength);         // returns true if the the mouse pointer during a mousepress is within the tile
 }
 

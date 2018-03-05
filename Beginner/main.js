@@ -82,7 +82,7 @@ function mousePressed() {   //Executes on mousePress
         wonGame = true; 
         score = score + 50;   // adds 50 score once the game has been won.
         if (time < 60) {
-          alert('Game Won with a score of ' + score + '\n\nCompleted with a time of ' + (time-1) + ' Seconds'); // Prompts the user with their score and time in seconds
+          alert('Game Won with a score of ' + score + '\n\nCompleted with a time of ' + (time) + ' Seconds'); // Prompts the user with their score and time in seconds
         } else if (time >= 60) {
           alert('Game Won with a score of ' + score + '\n\nCompleted with a time of ' + minutes + ' Minutes ' + seconds + ' Seconds'); // Prompts the user with score and time in Minutes
         }
@@ -91,7 +91,7 @@ function mousePressed() {   //Executes on mousePress
         updateScore();
       }
     }
-      if (grid[i][j].contains(mouseX, mouseY)) {    //checks to see whether a tile has been clicked on
+      if (grid[i][j].mousePoint(mouseX, mouseY)) {    //checks to see whether a tile has been clicked on
         if (grid[i][j].revealed === false) {
         grid[i][j].reveal();    //if condition is met, the tile is revealed
         updateScore();
@@ -104,7 +104,7 @@ function mousePressed() {   //Executes on mousePress
             timerStart = false;
           }
           if (time < 60) {  // condition for time in seconds
-          alert('Game Over! \nYou scored ' + score + ' with a time of ' + (time-1) + ' Seconds'); //prompts the user with a message that the game is lost, with time in seconds
+          alert('Game Over! \nYou scored ' + score + ' with a time of ' + (time) + ' Seconds'); //prompts the user with a message that the game is lost, with time in seconds
           updateScore();
         } else if (time >=60) { // checks for time in minutes
           alert('Game Over! \nYou scored ' + score + ' with a time of ' + (minutes) + ' Minutes ' + (seconds) + ' Seconds'); //prompts the user with a message that the game is lost, with time in minutes
@@ -120,22 +120,20 @@ function mousePressed() {   //Executes on mousePress
 }
 
 
-function Flag() {   //Executes on mousePress
+function Flag() {   
   for (var i = 0; i < cols; i++) {
     for (var j = 0; j < rows; j++) {
-      if (grid[i][j].contains(mouseX, mouseY)) {    //checks to see whether a tile has been clicked on
+      if (grid[i][j].mousePoint(mouseX, mouseY)) {    //checks to see whether a tile has been clicked on
         grid[i][j].flagTile();    //if condition is met, the tile is revealed
-        if (grid[i][j].mine) {
-        }
      }
     }
    }
   }
 
-function UnFlagTile() {   //Executes on mousePress
+function UnFlagTile() {   
   for (var i = 0; i < cols; i++) {
     for (var j = 0; j < rows; j++) {
-      if (grid[i][j].contains(mouseX, mouseY)) {    //checks to see whether a tile has been clicked on
+      if (grid[i][j].mousePoint(mouseX, mouseY)) {    //checks to see whether a tile has been clicked on
         grid[i][j].unflag();    //if condition is met, the tile is revealed
      }
     }

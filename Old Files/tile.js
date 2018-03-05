@@ -35,7 +35,7 @@ Tile.prototype.reveal = function() {
    }
 }
 
-Tile.prototype.mousePoint = function(x, y) {
+Tile.prototype.contains = function(x, y) {
   return (x > this.x && x < this.x + this.tileLength && y > this.y && y < this.y + this.tileLength);         // returns true if the the mouse pointer during a mousepress is within the tile
 }
 
@@ -60,7 +60,7 @@ Tile.prototype.show = function() {
       if (this.noNeighbours > 0) {
         textAlign(CENTER);
         fill(0);
-        text(this.noNeighbours, this.x + this.tileLength * 0.5, this.y + this.tileLength - 5); // Fills the tile with the number of surrounding mines
+        text(this.noNeighbours, this.x + this.tileLength * 0.5, this.y + this.tileLength - 10); // Fills the tile with the number of surrounding mines
       }
       }
      }

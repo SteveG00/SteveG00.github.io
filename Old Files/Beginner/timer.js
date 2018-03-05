@@ -1,11 +1,12 @@
 var h1 = document.getElementById('timer') //referencing html elements
+var start = document.getElementById('start')
+var stop = document.getElementById('stop')
+var clear = document.getElementById('clear')
 var seconds = 0 // Declare Global Variables
 var minutes = 0;
 var time = 0;       
 var active = false;
 
-
-/* Recursive incrementation of the timer*/
 function add() {    //adds one second to the timer when called
      if (active === true) {
     seconds++;      //increments seconds

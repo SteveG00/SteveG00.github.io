@@ -1,4 +1,7 @@
 var h1 = document.getElementById('timer') //referencing html elements
+var start = document.getElementById('start')
+var stop = document.getElementById('stop')
+var clear = document.getElementById('clear')
 var seconds = 0 // Declare Global Variables
 var minutes = 0;
 var time = 0;       

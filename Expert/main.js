@@ -63,14 +63,7 @@ grid[i][j].mine = true;
 }
 
 
-function isOver() { 				          //Game over function
 
-		 for (var i = 0; i < cols; i++) {
-    		for (var j = 0; j < rows; j++) {
-   			grid[i][j].revealed = true;		//Changes the property of each cell to reveal itself
-		}
-	}
-}
 
 function mousePressed() {   //Executes on mousePress
   for (var i = 0; i < cols; i++) {
@@ -90,7 +83,7 @@ function mousePressed() {   //Executes on mousePress
       }
     }
 
-      if (grid[i][j].contains(mouseX, mouseY)) {    //checks to see whether a tile has been clicked on
+      if (grid[i][j].mousePoint(mouseX, mouseY)) {    //checks to see whether a tile has been clicked on
         if (grid[i][j].revealed === false) {
         grid[i][j].reveal();    //if condition is met, the tile is revealed
         updateScore();
@@ -103,7 +96,7 @@ function mousePressed() {   //Executes on mousePress
             timerStart = false;
           }
           if (time < 60) {  // condition for time in seconds
-          alert('Game Over! \nYou scored ' + score + ' with a time of ' + time + ' Seconds'); //prompts the user with a message that the game is lost, with time in seconds
+          alert('Game Over! \nYou scored ' + score + ' with a time of ' + (time) + ' Seconds'); //prompts the user with a message that the game is lost, with time in seconds
           updateScore();
         } else if (time >=60) { // checks for time in minutes
           alert('Game Over! \nYou scored ' + score + ' with a time of ' + minutes + ' Minutes ' + seconds + ' Seconds'); //prompts the user with a message that the game is lost, with time in minutes
@@ -119,22 +112,20 @@ function mousePressed() {   //Executes on mousePress
 }
 
 
-function Flag() {   //Executes on mousePress
+function Flag() {   
   for (var i = 0; i < cols; i++) {
     for (var j = 0; j < rows; j++) {
-      if (grid[i][j].contains(mouseX, mouseY)) {    //checks to see whether a tile has been clicked on
+      if (grid[i][j].mousePoint(mouseX, mouseY)) {    //checks to see whether a tile has been clicked on
         grid[i][j].flagTile();    //if condition is met, the tile is revealed
-        if (grid[i][j].mine) {
-        }
      }
     }
    }
   }
 
-function UnFlagTile() {   //Executes on mousePress
+function UnFlagTile() {   
   for (var i = 0; i < cols; i++) {
     for (var j = 0; j < rows; j++) {
-      if (grid[i][j].contains(mouseX, mouseY)) {    //checks to see whether a tile has been clicked on
+      if (grid[i][j].mousePoint(mouseX, mouseY)) {    //checks to see whether a tile has been clicked on
         grid[i][j].unflag();    //if condition is met, the tile is revealed
      }
     }
@@ -160,7 +151,15 @@ function gameWon() {
     }
   }
 }
-  
+
+function isOver() { 				          //Game over function
+
+		 for (var i = 0; i < cols; i++) {
+    		for (var j = 0; j < rows; j++) {
+   			grid[i][j].revealed = true;		//Changes the property of each cell to reveal itself
+		}
+	}
+}
 
 function reloadPage() { //reloads the current webpage when called
   location.reload();

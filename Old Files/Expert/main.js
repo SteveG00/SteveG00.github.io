@@ -1,9 +1,9 @@
 //Declare Global variables
-var tileLength = 25;  //length of each tile (in px)
-var noMines = 50;     //No mines that will be placed in the board
-var grid;           
-var cols;         
-var rows; 
+var tileLength = 20;  //length of each tile (in px)
+var noMines = 100;     //No mines that will be placed in the board
+var grid;
+var cols;
+var rows;
 var unopened = 0;
 var showAlert = true; //used to stop the Alert continuously looping itself
 var score = 0;
@@ -11,6 +11,24 @@ var wonGame = false;
 var lostGame = false;
 var font; // Only works if the website is hosted on a webServer, due to security reasons.
 var timerStart = false;
+
+
+function draw() {               //Runs continiously
+   background(51, 102, 204);    //draws and updates the canvas (board)
+  for (var i = 0; i < cols; i++) {  
+    for (var j = 0; j < rows; j++) {
+      grid[i][j].show(); 
+     }
+  }
+}
+
+function make2DArray(cols, rows) {    //Creates a new 2D array when called
+  var arr = new Array(cols);          // define 1D array
+  for (var i = 0; i < arr.length; i++) { 
+    arr[i] = new Array(rows);          //populate 1D array with a new array (2D array)
+  }
+  return arr; // Return unpopulated 2d Array
+}
 
 
 function setup() {                    //Function is called onLoad
@@ -44,22 +62,6 @@ grid[i][j].mine = true;
    }
 }
 
-function draw() {               //Runs continiously
-   background(51, 102, 204);  	//draws and updates the canvas (board)
-  for (var i = 0; i < cols; i++) {  
-    for (var j = 0; j < rows; j++) {
-      grid[i][j].show(); 
-     }
-  }
-}
-
-function make2DArray(cols, rows) {    //Create new 2D array
-  var arr = new Array(cols);          // define 1D array
-  for (var i = 0; i < arr.length; i++) { 
-    arr[i] = new Array(rows);          //populate 1D array with a new array (2D array)
-  }
-  return arr; // Return unpopulated 2d Array
-}
 
 function isOver() { 				          //Game over function
 
@@ -78,7 +80,7 @@ function mousePressed() {   //Executes on mousePress
         wonGame = true; 
         score = score + 50;   // adds 50 score once the game has been won.
         if (time < 60) {
-          alert('Game Won with a score of ' + score + '\n\nCompleted with a time of ' + (time) + ' Seconds'); // Prompts the user with their score and time in seconds
+          alert('Game Won with a score of ' + score + '\n\nCompleted with a time of ' + time + ' Seconds'); // Prompts the user with their score and time in seconds
         } else if (time >= 60) {
           alert('Game Won with a score of ' + score + '\n\nCompleted with a time of ' + minutes + ' Minutes ' + seconds + ' Seconds'); // Prompts the user with score and time in Minutes
         }
@@ -87,7 +89,8 @@ function mousePressed() {   //Executes on mousePress
         updateScore();
       }
     }
-      if (grid[i][j].mousePoint(mouseX, mouseY)) {    //checks to see whether a tile has been clicked on
+
+      if (grid[i][j].contains(mouseX, mouseY)) {    //checks to see whether a tile has been clicked on
         if (grid[i][j].revealed === false) {
         grid[i][j].reveal();    //if condition is met, the tile is revealed
         updateScore();
@@ -100,36 +103,38 @@ function mousePressed() {   //Executes on mousePress
             timerStart = false;
           }
           if (time < 60) {  // condition for time in seconds
-          alert('Game Over! \nYou scored ' + score + ' with a time of ' + (time) + ' Seconds'); //prompts the user with a message that the game is lost, with time in seconds
+          alert('Game Over! \nYou scored ' + score + ' with a time of ' + time + ' Seconds'); //prompts the user with a message that the game is lost, with time in seconds
           updateScore();
         } else if (time >=60) { // checks for time in minutes
-          alert('Game Over! \nYou scored ' + score + ' with a time of ' + (minutes) + ' Minutes ' + (seconds) + ' Seconds'); //prompts the user with a message that the game is lost, with time in minutes
+          alert('Game Over! \nYou scored ' + score + ' with a time of ' + minutes + ' Minutes ' + seconds + ' Seconds'); //prompts the user with a message that the game is lost, with time in minutes
           updateScore();
         }
         
-          }
-         }
         }
       }
     }
+   }
   }
+}
 }
 
 
-function Flag() {   
+function Flag() {   //Executes on mousePress
   for (var i = 0; i < cols; i++) {
     for (var j = 0; j < rows; j++) {
-      if (grid[i][j].mousePoint(mouseX, mouseY)) {    //checks to see whether a tile has been clicked on
+      if (grid[i][j].contains(mouseX, mouseY)) {    //checks to see whether a tile has been clicked on
         grid[i][j].flagTile();    //if condition is met, the tile is revealed
+        if (grid[i][j].mine) {
+        }
      }
     }
    }
   }
 
-function UnFlagTile() {   
+function UnFlagTile() {   //Executes on mousePress
   for (var i = 0; i < cols; i++) {
     for (var j = 0; j < rows; j++) {
-      if (grid[i][j].mousePoint(mouseX, mouseY)) {    //checks to see whether a tile has been clicked on
+      if (grid[i][j].contains(mouseX, mouseY)) {    //checks to see whether a tile has been clicked on
         grid[i][j].unflag();    //if condition is met, the tile is revealed
      }
     }
@@ -164,10 +169,10 @@ function reloadPage() { //reloads the current webpage when called
 function updateScore() {     
 var element = document.getElementById("score");  //Updates the 'span' displaying score diplayed in the html page
 if (wonGame) {
-element.innerHTML = "Score: " + score + " (Game Won)";
+element.innerHTML = "Score: " + score + " (Game Won)";  //condition for when game is won
 } else if (lostGame) {
-    element.innerHTML = "Score: " + score + " (Game Lost)";
+    element.innerHTML = "Score: " + score + " (Game Lost)"; //condition for when game is lost
   } else {
-    element.innerHTML = "Score: " + score;
+    element.innerHTML = "Score: " + score; //condition for when game is in progress
   }
 }

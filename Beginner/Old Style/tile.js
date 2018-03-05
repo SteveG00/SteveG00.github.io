@@ -1,19 +1,19 @@
 // Minesweeper Game Adv Higher Project
 // Stephen Graham
 
-function Tile(i, j, tileLength) {     // Tile Class Declaration
+function Tile(i, j, tileLength) {     // Tile Class Definition
 
 //Constructor for Tile Class properties
 
-  this.i = i;              //columns declaration
-  this.j = j;              //rows declaration
-  this.x = tileLength * i;          //x-axis declaration
-  this.y = tileLength * j;          //y-axis declaration
-  this.tileLength = tileLength;     //Tile's Length declaration
-  this.noNeighbours = 0;  //No. Neighbours declaration
-  this.revealed = false;    //Revealed State declaration
-  this.flagged = false;     //flagged state declaration
-  this.mine = false;        //mine state declaration
+  this.i = i;              //columns definition
+  this.j = j;              //rows definition
+  this.x = tileLength * i;          //x-axis definition
+  this.y = tileLength * j;          //y-axis definition
+  this.tileLength = tileLength;     //Tile's Length definition
+  this.noNeighbours = 0;  //No. Neighbours definition
+  this.revealed = false;    //Revealed State definition
+  this.flagged = false;
+  this.mine = false;
 }
 
 
@@ -35,8 +35,8 @@ Tile.prototype.reveal = function() {
    }
 }
 
-Tile.prototype.mousePoint = function(x, y) {
-  return (x > this.x && x < this.x + this.tileLength && y > this.y && y < this.y + this.tileLength);         // returns true if the the mouse pointer during a mousepress is within the tile
+Tile.prototype.contains = function(x, y) {
+  return (x > this.x && x < this.x + this.tileLength && y > this.y && y < this.y + this.tileLength);         //returns the value of the current position
 }
 
 

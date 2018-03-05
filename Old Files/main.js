@@ -1,9 +1,13 @@
+// Minesweeper Game Adv Higher Project
+// Stephen Graham
+
+
 //Declare Global variables
-var tileLength = 25;  //length of each tile (in px)
-var noMines = 50;     //No mines that will be placed in the board
-var grid;           
-var cols;         
-var rows; 
+var tileLength = 35;  //length of each tile (in px)
+var noMines = 25;   //No mines that will be placed in the board
+var grid;
+var cols;
+var rows;
 var unopened = 0;
 var showAlert = true; //used to stop the Alert continuously looping itself
 var score = 0;
@@ -15,13 +19,13 @@ var timerStart = false;
 
 function setup() {                    //Function is called onLoad
   updateScore();          
-  createCanvas(500, 500);            	//create canvas size 401x401
+  createCanvas(525, 525);            	//create canvas size 401x401
   cols = floor(width / tileLength);	          //calculate the number of columns
   rows = floor(height / tileLength);	          //calculate the number of rows
   grid = make2DArray(cols, rows);	    //call the 'make2DArray' Function
   for (var i = 0; i < cols; i++) {	   
     for (var j = 0; j < rows; j++) {
-      grid[i][j] = new Tile(i, j, tileLength);	//define each cell as a new 'Tile'
+      grid[i][j] = new Tile(i, j, tileLength);	//creates a new tile for each cell on the board
       if (grid[i][j].revealed === false) {
         unopened++
       }
@@ -78,7 +82,7 @@ function mousePressed() {   //Executes on mousePress
         wonGame = true; 
         score = score + 50;   // adds 50 score once the game has been won.
         if (time < 60) {
-          alert('Game Won with a score of ' + score + '\n\nCompleted with a time of ' + (time) + ' Seconds'); // Prompts the user with their score and time in seconds
+          alert('Game Won with a score of ' + score + '\n\nCompleted with a time of ' + (time-1) + ' Seconds'); // Prompts the user with their score and time in seconds
         } else if (time >= 60) {
           alert('Game Won with a score of ' + score + '\n\nCompleted with a time of ' + minutes + ' Minutes ' + seconds + ' Seconds'); // Prompts the user with score and time in Minutes
         }
@@ -87,7 +91,7 @@ function mousePressed() {   //Executes on mousePress
         updateScore();
       }
     }
-      if (grid[i][j].mousePoint(mouseX, mouseY)) {    //checks to see whether a tile has been clicked on
+      if (grid[i][j].contains(mouseX, mouseY)) {    //checks to see whether a tile has been clicked on
         if (grid[i][j].revealed === false) {
         grid[i][j].reveal();    //if condition is met, the tile is revealed
         updateScore();
@@ -100,36 +104,38 @@ function mousePressed() {   //Executes on mousePress
             timerStart = false;
           }
           if (time < 60) {  // condition for time in seconds
-          alert('Game Over! \nYou scored ' + score + ' with a time of ' + (time) + ' Seconds'); //prompts the user with a message that the game is lost, with time in seconds
+          alert('Game Over! \nYou scored ' + score + ' with a time of ' + (time-1) + ' Seconds'); //prompts the user with a message that the game is lost, with time in seconds
           updateScore();
         } else if (time >=60) { // checks for time in minutes
           alert('Game Over! \nYou scored ' + score + ' with a time of ' + (minutes) + ' Minutes ' + (seconds) + ' Seconds'); //prompts the user with a message that the game is lost, with time in minutes
           updateScore();
         }
         
-          }
-         }
         }
       }
     }
+   }
   }
+}
 }
 
 
-function Flag() {   
+function Flag() {   //Executes on mousePress
   for (var i = 0; i < cols; i++) {
     for (var j = 0; j < rows; j++) {
-      if (grid[i][j].mousePoint(mouseX, mouseY)) {    //checks to see whether a tile has been clicked on
+      if (grid[i][j].contains(mouseX, mouseY)) {    //checks to see whether a tile has been clicked on
         grid[i][j].flagTile();    //if condition is met, the tile is revealed
+        if (grid[i][j].mine) {
+        }
      }
     }
    }
   }
 
-function UnFlagTile() {   
+function UnFlagTile() {   //Executes on mousePress
   for (var i = 0; i < cols; i++) {
     for (var j = 0; j < rows; j++) {
-      if (grid[i][j].mousePoint(mouseX, mouseY)) {    //checks to see whether a tile has been clicked on
+      if (grid[i][j].contains(mouseX, mouseY)) {    //checks to see whether a tile has been clicked on
         grid[i][j].unflag();    //if condition is met, the tile is revealed
      }
     }
